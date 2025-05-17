@@ -1,0 +1,1 @@
+# Scale down certain deployments if single node (e.g., 1 replica instead of 2)
