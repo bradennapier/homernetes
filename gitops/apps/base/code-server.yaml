@@ -1,1 +1,21 @@
-# Code-server Deployment and Service
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: code-server
+  namespace: home
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: code-server
+  template:
+    metadata:
+      labels:
+        app: code-server
+    spec:
+      containers:
+        - name: code-server
+          image: coder/code-server:latest
+          args: ["--bind-addr", "0.0.0.0:8080"]
+          ports:
+            - containerPort: 8080

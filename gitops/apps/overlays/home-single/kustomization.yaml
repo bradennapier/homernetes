@@ -1,0 +1,13 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+resources:
+  - ../../base/home-assistant.yaml
+  - ../../base/node-red.yaml
+  - ../../base/code-server.yaml
+  - ../../base/mosquitto.yaml
+  - ../../base/zigbee2mqtt.yaml
+  - ../../base/api-gateway.yaml
+patchesStrategicMerge:
+  - hass-hostnetwork-patch.yaml
+  - zigbee2mqtt-patch.yaml
+  - replicas-patch.yaml

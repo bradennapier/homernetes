@@ -1,1 +1,8 @@
-# Patch Home Assistant to use hostNetwork: true (maybe only on single node)
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: home-assistant
+spec:
+  template:
+    spec:
+      hostNetwork: true

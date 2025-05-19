@@ -1,1 +1,18 @@
-# Patch to add nodeSelector for the node with USB, and device mount (ttyUSB0)
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: zigbee2mqtt
+spec:
+  template:
+    spec:
+      containers:
+        - name: zigbee2mqtt
+          volumeMounts:
+            - mountPath: /dev/ttyUSB0
+              name: usb
+      volumes:
+        - name: usb
+          hostPath:
+            path: /dev/ttyUSB0
+      nodeSelector:
+        kubernetes.io/hostname: talos-node

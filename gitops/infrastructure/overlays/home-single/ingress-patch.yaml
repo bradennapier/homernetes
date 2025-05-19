@@ -1,1 +1,12 @@
-# Patch ingress DaemonSet to tolerate master (single node serving ingress)
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  name: controller
+  namespace: ingress-nginx
+spec:
+  template:
+    spec:
+      tolerations:
+        - key: node-role.kubernetes.io/control-plane
+          operator: Exists
+          effect: NoSchedule

@@ -1,1 +1,11 @@
-# Kustomization that patches base manifests for single env
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+resources:
+  - ../../base/cloudflare-tunnel.yaml
+  - ../../base/coredns-configmap.yaml
+  - ../../base/externaldns.yaml
+  - ../../base/ingress-nginx.yaml
+  - ../../base/metallb.yaml
+patchesStrategicMerge:
+  - metallb-pool-patch.yaml
+  - ingress-patch.yaml

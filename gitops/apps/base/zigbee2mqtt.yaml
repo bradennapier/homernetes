@@ -1,1 +1,27 @@
-# Zigbee2MQTT Deployment (no specific USB path here, to be patched per env)
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: zigbee2mqtt
+  namespace: home
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: zigbee2mqtt
+  template:
+    metadata:
+      labels:
+        app: zigbee2mqtt
+    spec:
+      containers:
+        - name: zigbee2mqtt
+          image: koenkk/zigbee2mqtt:latest
+          env:
+            - name: MQTT_SERVER
+              value: "mqtt://mosquitto.home.svc.cluster.local:1883"
+          volumeMounts:
+            - mountPath: /app/data
+              name: data
+      volumes:
+        - name: data
+          emptyDir: {}

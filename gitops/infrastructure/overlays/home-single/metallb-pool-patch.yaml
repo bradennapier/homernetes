@@ -1,1 +1,12 @@
-# Patch MetalLB config to use a single node IP range or address
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: metallb-config
+  namespace: metallb-system
+data:
+  config: |
+    address-pools:
+    - name: default
+      protocol: layer2
+      addresses:
+      - 192.168.1.240-192.168.1.250
